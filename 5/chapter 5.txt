@@ -1,0 +1,20 @@
+1. For classifiers, the idea is to fit the widest margin possible (distance being measured in the input space) between the two classes while minimizing the number of margin violations (instances in margin or on wrong side).
+For regressors, the idea is to fit your line such that it minimizes the number of instances which fall more than a predefined distance (epsilon) away from the line
+
+2. A support vector is an instance in a SVM that defines the model. In classifiers they are the instances closest to the margin and on the correct side of it. In regressors they are all instances that fall outside the margin
+3. It is important to scale the inputs when using SVMs because SVM classifiers attempt to maximize the margin (measured as a distance in the input space) between the two classes.
+If you don't scale the input, the classifier will be biased towards finding a decision boundary that divides features with naturally larger magnitudes
+
+4. An SVM cannot output a confidence score nor a probability when it classifies an instance. Only a decision score
+5. The primal form of the SVM problem will be faster when the number of instances is greater than the number of features, so use the primal form. Unless you want to use the kernel trick, then you need to use the dual form.
+6. If you are underfitting the training set, you want to decrease regularization. This means increasing gamma and/or increasing C.
+
+7. number_of_parameters = 1 (bias term) + n (number of features) + m (number of instances)
+   number_of_constraints = m (number of instances)
+   H = (number_of_parameters x number_of_parameters) identity matrix, but replacing the 1s with 0s on the first row (bias term) and the (n + 2)th through the (1 + n + m)th rows (zeta values). this will zero out the bias term and zeta values to isolate the feature weights
+   f = (number_of_parameters x 1) matrix full of zeros except for the (n + 2)th through the (1 + n + m)th rows, which will instead contain C. this will zero out the bias term and feature weights to isolate the zeta values
+   A = (number_of_constraints x number_of_parameters) where each row i consists of the following : a 1 (capture bias term), the feature inputs for the ith instance of the data, and m zeroes except for the (1 + n + i)th column which contains a 1 (selects approriate zeta value according to which instance, i.e. row, is being considered)
+	you can essentially imagine an (m x m) identity matrix glued to the right of the x_dot matrix (which is a (m x n + 1) matrix, where each row i consists of a 1 (bias term) and the feature inputs for the ith instance)
+   b = (number_of_constraints x 1) matrix full of -1
+
+where p will be a (number_of_parameters x 1) matrix consisting of the bias, feature weights, and zeta (slack variable) values in that order

@@ -1,0 +1,15 @@
+1. gradient descent
+2. regularized regression models might suffer. can use a standard scaler
+3. no, there is only a global minimum if you use log loss cost function
+4. not necessarily, depends on learning rate, might diverge if learning rate is too big
+5. overfitting. regularize model, or pick a simple model, or more training data
+6. no, validation error for minibatch does not descend as smoothly as with batch,
+need to wait and make sure validation error continues to increase for a while to be more confident that that was the minimum and not just noisy descent
+
+7. stochastic is fastest. batch will actually converge. others will converge if you use a good learning rate
+8. overfitting. regularize model, use a simpler model, or get more/better quality training data
+9. high bias, the model is underfitting, deregularize by decreasing alpha
+10a. it is almost preferable to have at least a little bit of regularization to assist in generalization
+b. performs feature selection
+c. performs less extreme feature selection, pure lasso behaves erratically when number of features exceeds number of training instances or when several features are strongly correlated
+11. two logistic regression (two binary classifications needed)
